@@ -1,5 +1,7 @@
 github.com/kaspanet/go-secp256k1 v0.0.7 h1:WHnrwopKB6ZeHSbdAwwxNhTqflm56XT1mM6LF4/OvOs=
 github.com/kaspanet/go-secp256k1 v0.0.7/go.mod h1:cFbxhxKkxqHX5eIwUGKARkph19PehipDPJejWB+H0jM=
+github.com/kaspanet/kaspad v0.12.22 h1:1RxIl4EjYJTEqVF6IgXEffK4M32oo/gO1Jz9F8s5H4w=
+github.com/kaspanet/kaspad v0.12.22/go.mod h1:yu3Bciz4cRVItIcBcDKMuLHg5/FOMzd7EaXxNHMXgSY=
 github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
 github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 golang.org/x/crypto v0.43.0 h1:dduJYIi3A3KOfdGOHX8AVZ/jGiyPa3IbBozJ5kNuE04=

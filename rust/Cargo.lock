@@ -3285,6 +3285,7 @@ name = "rust"
 version = "0.1.0"
 dependencies = [
  "hex",
+ "kaspa-addresses",
  "kaspa-hashes",
  "kaspa-wallet-core",
  "secp256k1",

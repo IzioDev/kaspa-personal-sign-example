@@ -1,4 +1,5 @@
 use hex::FromHex;
+use kaspa_addresses::Address;
 use kaspa_hashes::PersonalMessageSigningHash;
 use kaspa_wallet_core::message::{
     PersonalMessage, SignMessageOptions, sign_message, verify_message,
@@ -15,6 +16,14 @@ fn main() {
     let (xonly, _parity) = XOnlyPublicKey::from_keypair(&kp);
 
     println!("pk: {}", hex::encode(xonly.serialize()));
+
+    let kaspa_address = Address::new(
+        kaspa_addresses::Prefix::Mainnet,
+        kaspa_addresses::Version::PubKey,
+        &xonly.serialize(),
+    );
+
+    println!("kaspa address: {}", kaspa_address);
 
     let msg = PersonalMessage("hello world");
 
