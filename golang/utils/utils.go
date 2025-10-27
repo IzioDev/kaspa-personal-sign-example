@@ -15,13 +15,26 @@ func PersonalMessageHash(msg []byte) [32]byte {
 	return out
 }
 
-func SignPersonal(sk *secp256k1.SchnorrKeyPair, msg []byte) (*secp256k1.SerializedSchnorrSignature, error) {
+func SignPersonalSchnorr(sk *secp256k1.SchnorrKeyPair, msg []byte) (*secp256k1.SerializedSchnorrSignature, error) {
 	digest := PersonalMessageHash(msg)
 
 	var hash secp256k1.Hash
 	copy(hash[:], digest[:])
 
 	sig, err := sk.SchnorrSign(&hash)
+	if err != nil {
+		return nil, err
+	}
+	return sig.Serialize(), nil
+}
+
+func SignPersonalECDSA(sk *secp256k1.ECDSAPrivateKey, msg []byte) (*secp256k1.SerializedECDSASignature, error) {
+	digest := PersonalMessageHash(msg)
+
+	var hash secp256k1.Hash
+	copy(hash[:], digest[:])
+
+	sig, err := sk.ECDSASign(&hash)
 	if err != nil {
 		return nil, err
 	}
@@ -49,5 +62,24 @@ func VerifyPersonalSchnorr(msg []byte, sigBytes, pubKeyBytes []byte) (bool, erro
 	}
 
 	ok := pub.SchnorrVerify(&h, sig)
+	return ok, nil
+}
+
+func VerifyPersonalECDSA(msg []byte, sigBytes, pubKeyBytes []byte) (bool, error) {
+	d := PersonalMessageHash(msg)
+
+	var h secp256k1.Hash
+	copy(h[:], d[:])
+
+	sig, err := secp256k1.DeserializeECDSASignatureFromSlice(sigBytes)
+	if err != nil {
+		return false, err
+	}
+	pub, err := secp256k1.DeserializeECDSAPubKey(pubKeyBytes)
+	if err != nil {
+		return false, err
+	}
+
+	ok := pub.ECDSAVerify(&h, sig)
 	return ok, nil
 }

@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-hex = "0.4.3"
+hex = { version = "0.4.3", features = ["serde"] }
 kaspa-hashes = { git = "https://github.com/kaspanet/rusty-kaspa.git", tag = "v1.0.1" }
 kaspa-wallet-core = { git = "https://github.com/kaspanet/rusty-kaspa.git", tag = "v1.0.1" }
 kaspa-addresses = { git = "https://github.com/kaspanet/rusty-kaspa.git", tag = "v1.0.1" }

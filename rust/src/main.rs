@@ -37,11 +37,11 @@ fn main() {
         &msg,
         &sk.secret_bytes(),
         // for debug purpose
-        &SignMessageOptions { no_aux_rand: true },
+        &SignMessageOptions { no_aux_rand: false },
     )
     .expect("sign");
 
-    println!("signature: {}", hex::encode(sig.clone()));
+    println!("signature: {}", hex::encode(sig.as_slice()));
 
     verify_message(&msg, &sig, &xonly).expect("verify");
 

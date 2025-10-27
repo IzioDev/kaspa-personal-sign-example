@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/hex"
+	"fmt"
 
 	"github.com/kaspanet/kaspad/util/bech32"
 )
@@ -21,8 +22,22 @@ func main() {
 		panic("invalid pk hex")
 	}
 
-	// 0 for schnorr, 1 for ecdsa
-	var encoded = bech32.Encode("kaspa", pkBytes, 0)
+	if len(pkBytes) != 32 && len(pkBytes) != 33 {
+		fmt.Println("expected length or 32 (schnorr) or 33 (ecdsa) for payload, got:", len(pkBytes))
+		panic("")
+	}
 
-	print("encoded ", encoded)
+	if len(pkBytes) == 32 {
+		// 0 for schnorr, 1 for ecdsa
+		var encoded = bech32.Encode("kaspa", pkBytes, 0)
+
+		print("encoded (schnorr):  ", encoded)
+	}
+
+	if len(pkBytes) == 33 {
+		// 0 for schnorr, 1 for ecdsa
+		var encoded = bech32.Encode("kaspa", pkBytes, 1)
+
+		print("encoded (ecdsa):  ", encoded)
+	}
 }
